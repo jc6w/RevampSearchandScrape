@@ -13,7 +13,7 @@ namespace RevampSearchandScrape
             pack = new ExcelPackage();
             fileName = new FileInfo("toBeFilled.xlsx");
         }
-
+        //make abstract???
         public void WriteToExcel()
         {
 
@@ -21,7 +21,7 @@ namespace RevampSearchandScrape
 
         public void SaveExcel()
         {
-            
+
         }
 
     }
