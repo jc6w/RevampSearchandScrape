@@ -13,6 +13,7 @@ namespace RevampSearchandScrape
     {
         static IWebDriver driver;
         protected static IWebElement searchBox;
+        Excel excel;
 
         public Browse(string browser, string website)
         {
@@ -48,6 +49,7 @@ namespace RevampSearchandScrape
         {
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(0));
+            excel = new Excel();
         }
 
         public void SearchBox(string searchTerm)
@@ -55,6 +57,11 @@ namespace RevampSearchandScrape
             searchBox = driver.FindElement(By.CssSelector("input[type='text']"));
 
             searchBox.SendKeys(searchTerm);
+        }
+        public void Close()
+        {
+            excel.SaveExcel();
+            driver.Quit();
         }
     }
 }

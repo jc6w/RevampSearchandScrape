@@ -14,6 +14,8 @@ namespace RevampSearchandScrape
             Browse browse = new Browse(browser, website);
 
             browse.SearchBox(searchTerm);
+
+            browse.Close();
         }
     }
 }
