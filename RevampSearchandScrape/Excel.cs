@@ -3,7 +3,7 @@ using System.IO;
 using OfficeOpenXml;
 namespace RevampSearchandScrape
 {
-    public class Excel
+    public abstract class Excel
     {
         ExcelPackage pack;
         FileInfo fileName;
@@ -14,10 +14,7 @@ namespace RevampSearchandScrape
             fileName = new FileInfo("toBeFilled.xlsx");
         }
         //make abstract???
-        public void WriteToExcel()
-        {
-
-        }
+        public abstract void WriteToExcel();
 
         public void SaveExcel()
         {

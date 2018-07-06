@@ -11,7 +11,7 @@ namespace RevampSearchandScrape
             Console.WriteLine("Hello World!");
             Console.WriteLine("Please choose from the following browsers");
 
-            Browse browse = new Browse(browser, website);
+            var browse = new Browse(browser, website);
 
             browse.SearchBox(searchTerm);
 
