@@ -87,6 +87,17 @@
     <Compile Include="Browse.cs" />
     <Compile Include="Excel.cs" />
     <Compile Include="WebElement.cs" />
+    <Compile Include="AddToList.cs" />
+    <Compile Include="ISearchBox.cs" />
+    <Compile Include="IClose.cs" />
+    <Compile Include="IFindList.cs" />
+    <Compile Include="ISetup.cs" />
+    <Compile Include="IElementPresent.cs" />
+    <Compile Include="IWriteToExcel.cs" />
+    <Compile Include="IListFilter.cs" />
+    <Compile Include="IGoToElement.cs" />
+    <Compile Include="IWriteToList.cs" />
+    <Compile Include="IWriteListToList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -8,18 +8,17 @@ namespace RevampSearchandScrape
         ExcelPackage pack;
         FileInfo fileName;
 
-        public Excel()
+        public Excel(ExcelPackage package, FileInfo f)
         {
-            pack = new ExcelPackage();
-            fileName = new FileInfo("toBeFilled.xlsx");
+            pack = package;
+            fileName = f;
         }
-        //make abstract???
-        public void WriteToExcel(){}
 
         public void SaveExcel()
         {
             pack.SaveAs(fileName);
         }
+
     }
 }
 
