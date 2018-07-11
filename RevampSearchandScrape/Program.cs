@@ -1,12 +1,4 @@
-﻿using System;
-using OpenQA.Selenium.Chrome;
-//using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Safari;
-using OpenQA.Selenium.Opera;
-using OfficeOpenXml;
-using System.IO;
+﻿using OpenQA.Selenium.Chrome;
 
 namespace RevampSearchandScrape
 {
@@ -14,7 +6,9 @@ namespace RevampSearchandScrape
     {
         public static void Main(string[] args)
         {
-            
+            SiteTest test = new SiteTest(new AmazonTest(), new ChromeDriver());
+            test.Start();
+            test.Stop();
         }
     }
 }

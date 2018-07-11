@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace RevampSearchandScrape
 {//MAKE ABSTRACT
-    public abstract class WebElement
+    public abstract class WebElementList
     {
         List<string> list;
         List<List<string>> list2;
@@ -13,7 +13,7 @@ namespace RevampSearchandScrape
         IWebElement element;
         IWebDriver driver;
 
-        WebElement(IWebDriver dr, IWebElement we)
+        WebElementList(IWebDriver dr, IWebElement we)
         {
             driver = dr;
             element = we;

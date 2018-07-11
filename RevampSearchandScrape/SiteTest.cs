@@ -1,15 +1,28 @@
 ﻿using System;
+using OpenQA.Selenium;
+
 namespace RevampSearchandScrape
 {
-    public abstract class SiteTest
+    public class SiteTest
     {
-        string website;
-        Browse browser;
-        Excel excel;
-        public SiteTest(Browse b, Excel e)
+        public ITest Test { get; set; }
+        public IWebDriver Browse { get; set; }
+
+        public SiteTest(ITest t, IWebDriver b)
         {
-            browser = b;
-            excel = e;
+            Test = t;
+            Browse = b;
+            Browse.Url = Test.website;
+        }
+
+        public void Start()
+        {
+            
+        }
+
+        public void Stop()
+        {
+            Browse.Quit();
         }
     }
 }
