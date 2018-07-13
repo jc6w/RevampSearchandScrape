@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium.Chrome;
+﻿using OfficeOpenXml;
+using OpenQA.Selenium.Chrome;
+using System.IO;
 
 namespace RevampSearchandScrape
 {
@@ -6,8 +8,11 @@ namespace RevampSearchandScrape
     {
         public static void Main(string[] args)
         {
-            SiteTest test = new SiteTest(new AmazonTest(), new ChromeDriver());
-            test.Start();
+            ExcelPackage package = new ExcelPackage();
+            ITest newTest = new AmazonTest(new ChromeDriver(), package);
+            SiteTest test = new SiteTest(newTest, newTest.GetDriver(), new Excel(package, new FileInfo(newTest.GetFileName())));
+            test.Initialize();
+            test.Start("USB C Cable");
             test.Stop();
         }
     }

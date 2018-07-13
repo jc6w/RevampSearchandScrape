@@ -109,11 +109,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Excel.cs" />
-    <Compile Include="WebElementList.cs" />
-    <Compile Include="AddToList.cs" />
     <Compile Include="ISearchBox.cs" />
-    <Compile Include="IClose.cs" />
-    <Compile Include="IFindList.cs" />
+    <Compile Include="IFindElement.cs" />
     <Compile Include="IElementPresent.cs" />
     <Compile Include="IWriteToExcel.cs" />
     <Compile Include="IListFilter.cs" />
@@ -123,6 +120,17 @@
     <Compile Include="ITest.cs" />
     <Compile Include="AmazonTest.cs" />
     <Compile Include="SiteTest.cs" />
+    <Compile Include="IElement.cs" />
+    <Compile Include="IProdSuggest.cs" />
+    <Compile Include="ISearchResult.cs" />
+    <Compile Include="IProdDescription.cs" />
+    <Compile Include="IProdInfo.cs" />
+    <Compile Include="IProdReviews.cs" />
+    <Compile Include="AmSuggest.cs" />
+    <Compile Include="AmSearchResult.cs" />
+    <Compile Include="AmProdDescription.cs" />
+    <Compile Include="AmProdInfo.cs" />
+    <Compile Include="AmProdReviews.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

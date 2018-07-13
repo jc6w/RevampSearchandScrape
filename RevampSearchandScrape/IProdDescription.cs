@@ -1,8 +1,7 @@
 ﻿using System;
 namespace RevampSearchandScrape
 {
-    public interface IFindList
+    public interface IProdDescription: IElement
     {
-        void FindList();
     }
 }

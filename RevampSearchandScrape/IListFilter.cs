@@ -3,6 +3,6 @@ namespace RevampSearchandScrape
 {
     public interface IListFilter
     {
-        bool ListFilter();
+        bool ListFilter(string s);
     }
 }
