@@ -160,6 +160,9 @@
     <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions">
       <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -188,6 +191,7 @@
     <Compile Include="AmProdInfo.cs" />
     <Compile Include="AmProdReviews.cs" />
     <Compile Include="ContainerUnity.cs" />
+    <Compile Include="LoggingInterceptor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
