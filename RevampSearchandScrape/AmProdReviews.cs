@@ -95,6 +95,8 @@ namespace RevampSearchandScrape
                 {
                     text = temp.Text;
                 }
+                text.TrimStart('\0');
+                text.TrimStart(' ');
                 text.TrimEnd('\0');
                 text.TrimEnd(' ');
                 List.Add(text);

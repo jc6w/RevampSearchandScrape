@@ -30,9 +30,8 @@ namespace RevampSearchandScrape
         {
             if (IsElementPresent(by))
             {
-                WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(3));
-                wait.Until(Driver => Driver.FindElement(by));
                 Element = Driver.FindElement(by);
+                Console.WriteLine(Element.Text);
 
                 IWebElement child = Element.FindElement(By.Id("suggestions"));
 

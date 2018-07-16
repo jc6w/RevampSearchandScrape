@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace RevampSearchandScrape
 {
-    public class SiteTest 
+    public class SiteTest
     {
         public ITest Test { get; set; }
         public IWebDriver Browse { get; set; }
@@ -20,14 +20,13 @@ namespace RevampSearchandScrape
         public void Initialize()
         {
             Browse.Manage().Window.Maximize();
-            Browse.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(0));
+            Browse.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
         }
 
 
         public void Start(string searchTerm)
         {
-            Test.SearchBox(searchTerm);
-            Test.FindProducts();
+            Test.SearchFor(searchTerm);
 
         }
 

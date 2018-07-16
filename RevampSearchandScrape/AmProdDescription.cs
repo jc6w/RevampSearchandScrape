@@ -39,6 +39,7 @@ namespace RevampSearchandScrape
                         List.Add(e.Text);
                 }
             }
+            WriteToExcel();
         }
 
         public bool IsElementPresent(By by)
@@ -70,14 +71,14 @@ namespace RevampSearchandScrape
         public void WriteToExcel()
         {
             ExcelWorksheet ws = Package.Workbook.Worksheets.Add("Product Description");
-            ws.Column(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
-            ws.Column(1).Style.VerticalAlignment = ExcelVerticalAlignment.Top;
             ws.Cells["A1"].Style.Font.Bold = true;
             ws.Cells["A1"].Value = "Product Description:";
             for (int x = 0; x < List.Count; x++)
             {
                 ws.Cells[x + 2, 1].Value = List[x];
             }
+            ws.Column(1).Style.WrapText = true;
+            ws.Column(1).Width = 100;
         }
     }
 }

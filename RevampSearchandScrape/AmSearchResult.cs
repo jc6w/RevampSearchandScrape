@@ -46,14 +46,17 @@ namespace RevampSearchandScrape
 
                 foreach (IWebElement e in anchors)
                 {
-                    if (ListFilter(e.Text) == false && e.GetAttribute("class") == "s-result-item celwidget  ")
+                    if (ListFilter(e.Text) == false)
                     {
-                        List = new List<string>();
-                        WriteToList(e, By.TagName("h2"));
-                        WriteToList(e, By.CssSelector("span[class='a-size-small a-color-secondary']:nth-of-type(2)"));
-                        WriteToList(e, By.TagName("h3"));
-                        WriteToList(e, By.CssSelector("span[class='a-offscreen']"));
-                        WriteListToList();
+                        if (e.GetAttribute("class") == "s-result-item celwidget  ")
+                        {
+                            List = new List<string>();
+                            WriteToList(e, By.TagName("h2"));
+                            WriteToList(e, By.CssSelector("span[class='a-size-small a-color-secondary']:nth-of-type(2)"));
+                            WriteToList(e, By.TagName("h3"));
+                            WriteToList(e, By.CssSelector("span[class='a-offscreen']"));
+                            WriteListToList();
+                        }
                     }
                 }
             }
@@ -111,6 +114,8 @@ namespace RevampSearchandScrape
                 {
                     text = temp.Text;
                 }
+                text.TrimStart('\0');
+                text.TrimStart(' ');
                 text.TrimEnd('\0');
                 text.TrimEnd(' ');
                 List.Add(text);

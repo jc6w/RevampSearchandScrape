@@ -85,6 +85,8 @@ namespace RevampSearchandScrape
                 {
                     text = temp.Text;
                 }
+                text.TrimStart('\0');
+                text.TrimStart(' ');
                 text.TrimEnd('\0');
                 text.TrimEnd(' ');
                 List.Add(text);
@@ -114,9 +116,9 @@ namespace RevampSearchandScrape
                     ws.Cells[x + 1, y + 1].Value = List2[x][y];
                 }
             }
-            ws.Cells["B"].AutoFitColumns();
-            ws.Column(1).Style.WrapText = true;
-            ws.Column(1).Width = 100;
+            ws.Cells["A"].AutoFitColumns();
+            ws.Column(2).Width = 100;
+            ws.Column(2).Style.WrapText = true;
         }
     }
 }

@@ -14,6 +14,5 @@ namespace RevampSearchandScrape
 
         IWebDriver GetDriver();
         string GetFileName();
-        void FindProducts();
     }
 }

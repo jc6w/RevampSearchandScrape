@@ -36,16 +36,14 @@ namespace RevampSearchandScrape
             return FileName;
         }
 
-        public void SearchBox(string searchTerm)
+        public void SearchFor(string searchTerm)
         {
             IWebElement searchBox = Driver.FindElement(By.CssSelector("input[type='text']"));
-                searchBox.SendKeys(searchTerm);
-            ProdSuggest.FindElement();
-            Driver.FindElement(By.CssSelector("[type='submit']")).Click();
-        }
+            searchBox.SendKeys(searchTerm);
+            //ProdSuggest.FindElement();
+            IWebElement Click = Driver.FindElement(By.CssSelector("[type='submit']"));
+            Click.Click();
 
-        public void FindProducts()
-        {
             SearchResult.FindElement();
             ProdDesc.FindElement();
             ProdInfo.FindElement();

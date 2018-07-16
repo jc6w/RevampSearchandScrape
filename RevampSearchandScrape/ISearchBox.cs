@@ -3,6 +3,6 @@ namespace RevampSearchandScrape
 {
     public interface ISearchBox
     {
-        void SearchBox(string searchTerm);
+        void SearchFor(string searchTerm);
     }
 }
