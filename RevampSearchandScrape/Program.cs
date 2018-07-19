@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using System.IO;
 using Microsoft.Practices.Unity;
+using Unity;
 
 namespace RevampSearchandScrape
 {
@@ -16,6 +17,14 @@ namespace RevampSearchandScrape
             test.Initialize();
             test.Start("USB C Cable");
             test.Stop();
+            //IUnityContainer unityContainer = ContainerUnity.Initialize();
+            //ExcelPackage package = new ExcelPackage();
+            //ITest newTest = unityContainer.Resolve<ITest>();
+            //SiteTest test = unityContainer.Resolve<SiteTest>();
+            test.Initialize();
+            test.Start("USB C Cable");
+            test.Stop();
+
         }
     }
 }

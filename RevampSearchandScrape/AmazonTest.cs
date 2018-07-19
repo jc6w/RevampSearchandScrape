@@ -40,7 +40,7 @@ namespace RevampSearchandScrape
         {
             IWebElement searchBox = Driver.FindElement(By.CssSelector("input[type='text']"));
             searchBox.SendKeys(searchTerm);
-            //ProdSuggest.FindElement();
+            ProdSuggest.FindElement();
             IWebElement Click = Driver.FindElement(By.CssSelector("[type='submit']"));
             Click.Click();
 

@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using OfficeOpenXml;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using Unity;
 using Unity.Interception.ContainerIntegration;
-using Unity.RegistrationByConvention;
 using Unity.Interception.Interceptors.InstanceInterceptors.InterfaceInterception;
 using Unity.Registration;
-using System;
+using Unity.RegistrationByConvention;
 
 namespace RevampSearchandScrape
 {
@@ -45,7 +44,13 @@ namespace RevampSearchandScrape
 
         private static UnityContainer RegisterContainer(UnityContainer container)
         {
-            //container.RegisterType(typeof(IConnectionFactory),typeof(ConnectionFactory),new Interceptor<InterfaceInterceptor>(), new InterceptionBehavior<LoggingInterceptor>());
+            ExcelPackage package = new ExcelPackage();
+            container.RegisterInstance(package);
+
+            container.RegisterType<ITest, AmazonTest>();
+            container.RegisterType<IWebDriver, ChromeDriver>();
+
+            //container.RegisterType(typeof(IConnectionFactory,typeof(ConnectionFactory),new Interceptor<InterfaceInterceptor>(), new InterceptionBehavior<LoggingInterceptor>());
             //container.RegisterType(typeof(IQueryRepositoryDapper),typeof(QueryRepositoryDapper),new Interceptor<InterfaceInterceptor>(), new InterceptionBehavior<LoggingInterceptor>());
             //container.RegisterType(typeof(ICommandRepositoryDapper), typeof(CommandRepositoryDapper),new Interceptor<InterfaceInterceptor>(), new InterceptionBehavior<LoggingInterceptor>());
             //container.RegisterType(typeof(IQueryEmailInformation), typeof(QueryEmailInformation),new Interceptor<InterfaceInterceptor>(), new InterceptionBehavior<LoggingInterceptor>());
@@ -55,14 +60,5 @@ namespace RevampSearchandScrape
             return container;
         }
 
-    }
-    public static class TypeFilters
-    {
-        public static IEnumerable<Type> WithMatchingInterface(this IEnumerable<Type> types)
-        {
-            return types.Where(type =>
-                type.GetTypeInfo().GetInterface("I" + type.Name) != null);
-        }
-    }
     }
 }

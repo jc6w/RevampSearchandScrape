@@ -20,7 +20,6 @@ namespace RevampSearchandScrape
         public void Initialize()
         {
             Browse.Manage().Window.Maximize();
-            Browse.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
         }
 
 

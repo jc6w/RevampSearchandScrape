@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using OfficeOpenXml;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+using Selenium.Extensions;
 
 namespace RevampSearchandScrape
 {
@@ -30,9 +30,10 @@ namespace RevampSearchandScrape
         {
             if (IsElementPresent(by))
             {
+                WaitUntil.ElementPresent(Driver, by);
                 Element = Driver.FindElement(by);
                 Console.WriteLine(Element.Text);
-
+                WaitUntil.ElementPresent(Driver, By.Id("suggestions"));
                 IWebElement child = Element.FindElement(By.Id("suggestions"));
 
                 anchors = child.FindElements(By.TagName("div"));
