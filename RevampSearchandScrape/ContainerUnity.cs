@@ -47,7 +47,7 @@ namespace RevampSearchandScrape
             ExcelPackage package = new ExcelPackage();
             container.RegisterInstance(package);
 
-            container.RegisterType<ITest, AmazonTest>();
+            container.RegisterType<ITest, Test>();
             container.RegisterType<IWebDriver, ChromeDriver>();
 
             //container.RegisterType(typeof(IConnectionFactory,typeof(ConnectionFactory),new Interceptor<InterfaceInterceptor>(), new InterceptionBehavior<LoggingInterceptor>());

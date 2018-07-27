@@ -5,14 +5,8 @@ using OpenQA.Selenium;
 
 namespace RevampSearchandScrape
 {
-    public interface IElement : IFindElement, IElementPresent, IWriteToExcel
+    public interface IElement : IFindElement, IWriteToExcel
     {
-        ReadOnlyCollection<IWebElement> anchors { get; set; }
-        IWebElement Element { get; set; }
-        List<string> List { get; set; }
-        List<List<string>> List2 { get; set; }
-        IWebDriver Driver { get; set; }
-        ExcelPackage Package { get; set; }
-        By by { get; set; }
+        IExcel Excel { get; set; }
     }
 }

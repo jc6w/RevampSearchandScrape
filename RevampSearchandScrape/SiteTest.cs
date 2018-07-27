@@ -3,18 +3,20 @@ using OpenQA.Selenium;
 
 namespace RevampSearchandScrape
 {
-    public class SiteTest
+    public class SiteTest : ISiteTest
     {
         public ITest Test { get; set; }
-        public IWebDriver Browse { get; set; }
-        public Excel excel { get; set; }
+        public IDriver Driver { get; set; }
+        public IExcel Excel { get; set; }
+        IWebDriver Browse;
 
-        public SiteTest(ITest t, IWebDriver b, Excel e)
+        public SiteTest(ITest t, IDriver b, IExcel e)
         {
             Test = t;
-            Browse = b;
+            Driver = b;
+            Browse = Driver.WebDriver;
             Browse.Url = Test.Website;
-            excel = e;
+            Excel = e;
         }
 
         public void Initialize()
@@ -31,7 +33,7 @@ namespace RevampSearchandScrape
 
         public void Stop()
         {
-            excel.SaveExcel();
+            Excel.SaveExcel();
             Browse.Quit();
         }
     }

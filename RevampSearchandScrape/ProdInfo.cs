@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using OfficeOpenXml;
@@ -7,35 +7,35 @@ using OpenQA.Selenium;
 
 namespace RevampSearchandScrape
 {
-    public class AmProdInfo: IProdInfo
+    public class ProdInfo: ElementPresent, IProdInfo
     {
-        public ReadOnlyCollection<IWebElement> anchors { get; set; }
-        public IWebElement Element { get; set; }
-        public List<string> List { get; set; }
-        public List<List<string>> List2 { get; set; }
-        public IWebDriver Driver { get; set; }
-        public ExcelPackage Package { get; set; }
-        public By by { get; set; }
+        public IExcel Excel { get; set; }
+        IWebDriver driver;
+        ReadOnlyCollection<IWebElement> anchors;
+        IWebElement element;
+        List<string> list;
+        List<List<string>> list2;
+        By ByObj;
 
-        public AmProdInfo(By b, ExcelPackage e, IWebDriver d)
+        public ProdInfo(IExcel e, IDriver d)
         {
-            List = new List<string>();
-            List2 = new List<List<string>>();
-            Package = e;
-            by = b;
-            Driver = d;
+            list = new List<string>();
+            list2 = new List<List<string>>();
+            Excel = e;
+            ByObj = By.Id("prodDetails");
+            driver = d.WebDriver;
         }
 
         public void FindElement()
         {
-            if (IsElementPresent(by))
+            if (IsElementPresent(ByObj))
             {
-                Element = Driver.FindElement(by);
-                anchors = Element.FindElements(By.TagName("tr"));
+                element = driver.FindElement(ByObj);
+                anchors = element.FindElements(By.TagName("tr"));
 
                 foreach (IWebElement e in anchors)
                 {
-                    List = new List<string>();
+                    list = new List<string>();
                     WriteToList(e, By.TagName("th"));
                     WriteToList(e, By.TagName("td"));
                     WriteListToList();
@@ -44,31 +44,9 @@ namespace RevampSearchandScrape
             WriteToExcel();
         }
 
-        public bool IsElementPresent(By by)
-        {
-            try
-            {
-                Driver.FindElement(by);
-                return true;
-            }
-            catch (NoSuchElementException e)
-            {
-                return false;
-            }
-        }
+        public bool IsElementPresent(By by) => base.IsElementPresent(driver, by);
 
-        public bool IsElementPresent(IWebElement el, By by)
-        {
-            try
-            {
-                el.FindElement(by);
-                return true;
-            }
-            catch (NoSuchElementException e)
-            {
-                return false;
-            }
-        }
+        public override bool IsElementPresent(IWebElement el, By by) => base.IsElementPresent(el, by);
 
         public void WriteToList(IWebElement e, By b)
         {
@@ -89,31 +67,45 @@ namespace RevampSearchandScrape
                 text.TrimStart(' ');
                 text.TrimEnd('\0');
                 text.TrimEnd(' ');
-                List.Add(text);
+                list.Add(text);
             }
             else
             {
-                List.Add(null);
+                list.Add(null);
             }
         }
 
         public void WriteListToList()
         {
-            List2.Add(List);
+            list2.Add(list);
+        }
+
+        public ExcelWorksheet WorkSheetExists()
+        {
+            var excelList = Excel.Pack.Workbook.Worksheets.ToArray();
+            foreach (ExcelWorksheet e in excelList)
+            {
+                if (e.Name == "Product Information")
+                {
+                    return e;
+                }
+            }
+
+            return Excel.Pack.Workbook.Worksheets.Add("Product Information");
         }
 
         public void WriteToExcel()
         {
-            ExcelWorksheet ws = Package.Workbook.Worksheets.Add("Product Information");
+            ExcelWorksheet ws = WorkSheetExists();
             ws.Column(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
             ws.Column(1).Style.VerticalAlignment = ExcelVerticalAlignment.Top;
 
-            for (int x = 0; x < List2.Count; x++)
+            for (int x = 0; x < list2.Count; x++)
             {
                 ws.Cells[x + 1, 1].Style.Font.Bold = true;
-                for (int y = 0; y < List2[x].Count; y++)
+                for (int y = 0; y < list2[x].Count; y++)
                 {
-                    ws.Cells[x + 1, y + 1].Value = List2[x][y];
+                    ws.Cells[x + 1, y + 1].Value = list2[x][y];
                 }
             }
             ws.Cells["A"].AutoFitColumns();

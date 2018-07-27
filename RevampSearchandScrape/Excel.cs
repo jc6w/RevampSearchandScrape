@@ -2,22 +2,21 @@
 using OfficeOpenXml;
 namespace RevampSearchandScrape
 {
-    public class Excel
+    public class Excel: IExcel
     {
-        ExcelPackage pack;
+        public ExcelPackage Pack { get; set; }
         FileInfo fileName;
 
-        public Excel(ExcelPackage package, FileInfo f)
+        public Excel()
         {
-            pack = package;
-            fileName = f;
+            fileName = new FileInfo("/Users/jmcw/Downloads/AmazonList.xlsx");
+            Pack = new ExcelPackage(fileName);
         }
 
         public void SaveExcel()
         {
-            pack.SaveAs(fileName);
+            Pack.SaveAs(Pack.File);
         }
-
     }
 }
 

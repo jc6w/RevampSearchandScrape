@@ -4,8 +4,7 @@ namespace RevampSearchandScrape
     public interface ITest: ISearchBox
     {
         string Website { get; set; }
-        string FileName { get; set; }
-        IWebDriver Driver { get; set; }
+        IDriver Driver { get; set; }
         IProdSuggest ProdSuggest { get; set; }
         ISearchResult SearchResult { get; set; }
         IProdDescription ProdDesc { get; set; }
@@ -13,6 +12,5 @@ namespace RevampSearchandScrape
         IProdReviews ProdReviews { get; set; }
 
         IWebDriver GetDriver();
-        string GetFileName();
     }
 }

@@ -7,42 +7,41 @@ using OpenQA.Selenium;
 
 namespace RevampSearchandScrape
 {
-    public class AmSearchResult: ISearchResult
+    public class SearchResult : ElementPresent, ISearchResult
     {
+        public IExcel Excel { get; set; }
+        IWebDriver driver;
+        ReadOnlyCollection<IWebElement> anchors;
+        IWebElement element;
+        List<string> list;
+        List<List<string>> list2;
+        By ByObj;
 
-        public ReadOnlyCollection<IWebElement> anchors { get; set; }
-        public IWebElement Element { get; set; }
-        public List<string> List { get; set; }
-        public List<List<string>> List2 { get; set; }
-        public IWebDriver Driver { get; set; }
-        public ExcelPackage Package { get; set; }
-        public By by { get; set; }
-
-        public AmSearchResult(By b, ExcelPackage e, IWebDriver d)
+        public SearchResult(IExcel e, IDriver d)
         {
-            List = new List<string>();
-            List2 = new List<List<string>>();
-            Package = e;
-            by = b;
-            Driver = d;
+            list = new List<string>();
+            list2 = new List<List<string>>();
+            Excel = e;
+            ByObj = By.Id("atfResults");
+            driver = d.WebDriver;
         }
 
         public void GoToElement()
         {
             if (IsElementPresent(By.Id("result_4")))
             {
-                Element = Driver.FindElement(By.Id("result_4"));
-                Element.FindElement(By.TagName("a")).Click();
+                element = driver.FindElement(By.Id("result_4"));
+                element.FindElement(By.TagName("a")).Click();
             }
         }
 
         public void FindElement()
         {
-            if (IsElementPresent(by))
+            if (IsElementPresent(ByObj))
             {
-                Element = Driver.FindElement(by);
+                element = driver.FindElement(ByObj);
 
-                anchors = Element.FindElements(By.TagName("li"));
+                anchors = element.FindElements(By.TagName("li"));
 
                 foreach (IWebElement e in anchors)
                 {
@@ -50,7 +49,7 @@ namespace RevampSearchandScrape
                     {
                         if (e.GetAttribute("class") == "s-result-item celwidget  ")
                         {
-                            List = new List<string>();
+                            list = new List<string>();
                             WriteToList(e, By.TagName("h2"));
                             WriteToList(e, By.CssSelector("span[class='a-size-small a-color-secondary']:nth-of-type(2)"));
                             WriteToList(e, By.TagName("h3"));
@@ -64,31 +63,9 @@ namespace RevampSearchandScrape
             GoToElement();
         }
 
-        public bool IsElementPresent(By by)
-        {
-            try
-            {
-                Driver.FindElement(by);
-                return true;
-            }
-            catch (NoSuchElementException e)
-            {
-                return false;
-            }
-        }
+        public bool IsElementPresent(By by) => base.IsElementPresent(driver, by);
 
-        public bool IsElementPresent(IWebElement el, By by)
-        {
-            try
-            {
-                el.FindElement(by);
-                return true;
-            }
-            catch (NoSuchElementException e)
-            {
-                return false;
-            }
-        }
+        public override bool IsElementPresent(IWebElement el, By by) => base.IsElementPresent(el, by);
 
         public bool ListFilter(string s)
         {
@@ -118,23 +95,41 @@ namespace RevampSearchandScrape
                 text.TrimStart(' ');
                 text.TrimEnd('\0');
                 text.TrimEnd(' ');
-                List.Add(text);
+                list.Add(text);
             }
             else
             {
-                List.Add(null);
+                list.Add(null);
             }
         }
 
         public void WriteListToList()
         {
-            List2.Add(List);
+            list2.Add(list);
+        }
+
+        public ExcelWorksheet WorkSheetExists()
+        {
+            var excelList = Excel.Pack.Workbook.Worksheets.ToArray();
+            foreach (ExcelWorksheet e in excelList)
+            {
+                if (e.Name == "Amazon Search Results")
+                {
+                    return e;
+                }
+            }
+
+            return null;
         }
 
         public void WriteToExcel()
         {
-            ExcelWorksheet ws = Package.Workbook.Worksheets.Add("Amazon Search Results ");
+            ExcelWorksheet ws = WorkSheetExists();
 
+            if (ws == null)
+            {
+                ws = Excel.Pack.Workbook.Worksheets.Add("Amazon Search Results");
+            }
             ws.Cells["A1:D1"].Style.Font.Bold = true;
             ws.Cells["A1:D1"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             ws.Cells["A1:D1"].Style.VerticalAlignment = ExcelVerticalAlignment.Top;
@@ -142,11 +137,11 @@ namespace RevampSearchandScrape
             ws.Cells["B1"].Value = "Product Seller";
             ws.Cells["C1"].Value = "Product Type";
             ws.Cells["D1"].Value = "Product Price";
-            for (int x = 0; x < List2.Count; x++)
+            for (int x = 0; x < list2.Count; x++)
             {
-                for (int y = 0; y < List2[x].Count; y++)
+                for (int y = 0; y < list2[x].Count; y++)
                 {
-                    ws.Cells[x + 2, y + 1].Value = List2[x][y];
+                    ws.Cells[x + 2, y + 1].Value = list2[x][y];
                 }
             }
             ws.Cells["B"].AutoFitColumns();
