@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevampSearchandScrape", "RevampSearchandScrape\RevampSearchandScrape.csproj", "{B5B02099-877D-42A5-BCEA-06EF42416676}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrapeTests", "ScrapeTests\ScrapeTests.csproj", "{AAC0391F-721F-49C5-A926-07532C296FF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -13,5 +15,9 @@ Global
 		{B5B02099-877D-42A5-BCEA-06EF42416676}.Debug|x86.Build.0 = Debug|x86
 		{B5B02099-877D-42A5-BCEA-06EF42416676}.Release|x86.ActiveCfg = Release|x86
 		{B5B02099-877D-42A5-BCEA-06EF42416676}.Release|x86.Build.0 = Release|x86
+		{AAC0391F-721F-49C5-A926-07532C296FF0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AAC0391F-721F-49C5-A926-07532C296FF0}.Debug|x86.Build.0 = Debug|Any CPU
+		{AAC0391F-721F-49C5-A926-07532C296FF0}.Release|x86.ActiveCfg = Release|Any CPU
+		{AAC0391F-721F-49C5-A926-07532C296FF0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
